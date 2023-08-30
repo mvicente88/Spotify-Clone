@@ -1,6 +1,6 @@
-# Spotify
+# Spotify Clone with Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+This project is a Spotify simulation and clone developed using [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0. It aims to replicate the core functionalities of the Spotify music streaming service, including searching and playing songs, managing playlists, exploring artists and albums, and personalized recommendations. 
 
 ## Development server
 
@@ -14,14 +14,24 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Features
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Song search and playback.
+Playlist creation and management.
+Artist and album exploration.
+Personalized recommendations.
+User account integration.
 
-## Running end-to-end tests
+## Acknowledgments
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Special thanks to Leifer Mendez for the guidance and resources provided in the Udemy course on Angular development, which served as a foundation for this project.
 
-## Further help
+## Future Plans
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Unit Testing with Karma
+We're actively working on incorporating unit testing using Karma. Unit tests help ensure that individual components and functions of the application behave as expected. We'll be writing test cases to validate the behavior of various Angular components, services, directives, and pipes.
+
+### End-to-End Testing
+In addition to unit testing, we plan to implement end-to-end (E2E) testing. E2E tests simulate real user scenarios and interactions within the application. We'll be using tools like Protractor to automate the testing process and ensure the smooth functioning of the entire application flow.
+
+Stay tuned for updates as I make progress on adding these crucial testing aspects to the project!
