@@ -12,7 +12,9 @@ export class MultimediaService {
   public trackInfo$: BehaviorSubject<any> = new BehaviorSubject(undefined)
   public audio!: HTMLAudioElement
   public timeLapsed$: BehaviorSubject<string> = new BehaviorSubject('00:00')
-  public timeRemaining$: BehaviorSubject<string> = new BehaviorSubject ('')
+  public timeRemaining$: BehaviorSubject<string> = new BehaviorSubject('')
+  public playerStatus$: BehaviorSubject<string> = new BehaviorSubject('paused')
+  public playerPercentage$: BehaviorSubject<number> = new BehaviorSubject (0)
 
   constructor() { 
     this.audio = new Audio ()
@@ -29,15 +31,33 @@ export class MultimediaService {
   private listenAllEvents(): void{
     
     this.audio.addEventListener('timeupdate', this.calculateTime, false)
+    this.audio.addEventListener('playing', this.setPlayerStatus, false)
+    this.audio.addEventListener('play', this.setPlayerStatus, false)
+    this.audio.addEventListener('pause', this.setPlayerStatus, false)
+    this.audio.addEventListener('ended', this.setPlayerStatus, false)
+
+    
 
   }
 
   private calculateTime = () => {
     console.log('Triggering event')
     const { duration, currentTime } = this.audio
-    console.table([duration, currentTime])
+    //console.table([duration, currentTime])
     this.setTimeLapsed(currentTime)
     this.setRemaining(currentTime, duration)
+    this.setPercentage(currentTime, duration)
+  }
+
+  private setPercentage(currentTime: number, duration: number): void{
+    // duration 100%
+    //currentTime x
+    //currentTime * 100 / duration
+
+    let percentage = (currentTime * 100) / duration;
+    this.playerPercentage$.next(percentage)
+
+
   }
 
 
@@ -64,6 +84,26 @@ export class MultimediaService {
 
   }
 
+  private setPlayerStatus = (state: any) => {
+    console.log('state', state)
+    switch (state.type) {
+      case 'play':
+        this.playerStatus$.next('play ▶')
+        break;
+      case 'playing':
+        this.playerStatus$.next('playing 🎶')
+        break;
+      case 'ended':
+        this.playerStatus$.next('ended ⏹')
+        break;
+      default:
+        this.playerStatus$.next('paused ⏸')
+        break;
+    }
+    
+  }
+
+
 
   //PUBLIC FUNCTION
 
@@ -72,6 +112,27 @@ export class MultimediaService {
     this.audio.src = track.url
     this.audio.play()
   }
+
+public togglePlayer(): void {
+  console.log('Before toggle:', this.audio.paused, this.playerStatus$.getValue());
+
+  if (this.audio.paused) {
+    this.audio.play();
+  } else {
+    this.audio.pause();
+  }
+
+  console.log('After toggle:', this.audio.paused, this.playerStatus$.getValue());
+}
+  
+  public seekAudio(percentage: number): void {
+    const { duration } = this.audio
+    console.log(`Duration: ${duration}, Percentage ${percentage}`)
+    const percentageToSecond = (percentage * duration) / 100
+    console.log(percentageToSecond)
+    this.audio.currentTime = percentageToSecond
+  
+}
 
 }
 
