@@ -1,1 +1,6 @@
-<p>history-page works!</p>
+<div class="history-page">
+    <app-search (callbackData)="receiveData($event)"></app-search>
+    <app-play-list-body [tracks]="listResults$ | async"></app-play-list-body>
+</div>
+<!-- the async method configures the browser component to keep the last request and cancel previous requests, this method
+ensures that if there is a slow connection, we do not saturate the API with requests. -->

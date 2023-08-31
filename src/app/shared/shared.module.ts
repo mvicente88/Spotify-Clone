@@ -14,6 +14,7 @@ import { ImgBrokenDirective } from './directives/img-broken.directive';
 
 
 
+
 @NgModule({
   declarations: [
     SideBarComponent,
@@ -24,7 +25,7 @@ import { ImgBrokenDirective } from './directives/img-broken.directive';
     PlayListHeaderComponent,
     PlayListBodyComponent,
     OrderListPipe,
-    ImgBrokenDirective
+    ImgBrokenDirective,
   ],
   imports: [
     CommonModule,
