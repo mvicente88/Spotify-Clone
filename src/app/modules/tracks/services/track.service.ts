@@ -32,14 +32,18 @@ export class TrackService {
   getAllRandom$():Observable<any> {
     return this.httpClient.get(`${this.URL}/tracks`)
     .pipe(
-      tap(data => console.log('This is the log of tap operator with all tracks',data)),
-      mergeMap(({data}:any)=> this.skipById(data,5)),
-      tap(data => console.log('This is the log of tap operator, hidding track 5 using a promise and filter method',data)),
-      catchError((err) => {
-        const {status, statusText} = err;
-        console.log('Something went wrong 💀, please check me 🧐', [status, statusText]);
-        return of([])
+      
+      map(({data}:any)=> {
+        return data
       })
+    //   tap(data => console.log('This is the log of tap operator with all tracks',data)),
+    //   mergeMap(({data}:any)=> this.skipById(data,5)),
+    //   tap(data => console.log('This is the log of tap operator, hidding track 5 using a promise and filter method',data)),
+    //   catchError((err) => {
+    //     const {status, statusText} = err;
+    //     console.log('Something went wrong 💀, please check me 🧐', [status, statusText]);
+    //     return of([])
+    //   })
     )
   }
   

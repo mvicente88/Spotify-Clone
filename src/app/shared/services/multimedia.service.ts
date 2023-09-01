@@ -1,6 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
+import { TrackService } from '@modules/tracks/services/track.service';
+import { TracksModule } from '@modules/tracks/tracks.module';
 import { BehaviorSubject, Observable, Observer, Subject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +15,13 @@ export class MultimediaService {
   public trackInfo$: BehaviorSubject<any> = new BehaviorSubject(undefined)
   public audio!: HTMLAudioElement
   public timeElapsed$: BehaviorSubject<string> = new BehaviorSubject('00:00')
-  public timeRemaining$: BehaviorSubject<string> = new BehaviorSubject('-00:00') //ToDo: begining with total track duration
+  public timeRemaining$: BehaviorSubject<string> = new BehaviorSubject('  ') //ToDo: begining with total track duration
   public playerStatus$: BehaviorSubject<string> = new BehaviorSubject('paused')
-  public playerPercentage$: BehaviorSubject<number> = new BehaviorSubject (0)
+  public playerPercentage$: BehaviorSubject<number> = new BehaviorSubject(0)
+  private currentTrackIndex: number = -1;
 
-  constructor() { 
-    this.audio = new Audio ()
+  constructor(private trackService: TrackService) {
+    this.audio = new Audio()
     this.trackInfo$.subscribe(responseOK => {
       if (responseOK) {
         this.setAudio(responseOK)
@@ -28,7 +32,7 @@ export class MultimediaService {
     this.listenAllEvents()
   }
 
-  private listenAllEvents(): void{
+  private listenAllEvents(): void {
     
     this.audio.addEventListener('timeupdate', this.calculateTime, false)
     this.audio.addEventListener('playing', this.setPlayerStatus, false)
@@ -38,7 +42,7 @@ export class MultimediaService {
   }
 
   private setPlayerStatus = (state: any) => {
-    // console.log('state', state)
+    console.log('state', state)
     switch (state.type) {
       case 'play':
         this.playerStatus$.next('play')
@@ -64,7 +68,7 @@ export class MultimediaService {
     this.setPercentage(currentTime, duration)
   }
 
-  private setPercentage(currentTime: number, duration: number): void{
+  private setPercentage(currentTime: number, duration: number): void {
     // duration 100%
     //currentTime x
     //currentTime * 100 / duration
@@ -106,7 +110,7 @@ export class MultimediaService {
 
   //PUBLIC FUNCTION
 
-  public setAudio(track: TrackModel): void{
+  public setAudio(track: TrackModel): void {
     console.log('service with the track info', track);
     this.audio.src = track.url
     this.audio.play()
@@ -123,8 +127,35 @@ export class MultimediaService {
     console.log(percentageToSecond)
     this.audio.currentTime = percentageToSecond
   
-}
+  }
 
+  public playNextTrack(): void {
+    this.trackService.getAllTracks$().subscribe((tracks: TrackModel[]) => {
+      if (tracks.length === 0) return; // No hacemos nada si no hay pistas
+
+      this.currentTrackIndex = (this.currentTrackIndex + 1) % tracks.length;
+      const nextTrack: TrackModel = tracks[this.currentTrackIndex];
+
+      if (nextTrack) {
+        this.setAudio(nextTrack);
+        this.trackInfo$.next(nextTrack);
+      }
+    });
+  }
+
+  public playPreviousTrack(): void {
+    this.trackService.getAllTracks$().subscribe((tracks: TrackModel[]) => {
+      if (tracks.length === 0) return; // No hacemos nada si no hay pistas
+
+      this.currentTrackIndex = (this.currentTrackIndex - 1 + tracks.length) % tracks.length;
+      const previousTrack: TrackModel = tracks[this.currentTrackIndex];
+
+      if (previousTrack) {
+        this.setAudio(previousTrack);
+        this.trackInfo$.next(previousTrack);
+      }
+    });
+  }
 }
 
 

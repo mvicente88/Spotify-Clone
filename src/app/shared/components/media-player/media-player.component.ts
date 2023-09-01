@@ -11,7 +11,8 @@ import { Subscription } from 'rxjs';
 export class MediaPlayerComponent implements OnInit, OnDestroy {
   @ViewChild('progressBar') progressBar:ElementRef = new ElementRef('')
   listObservers$: Array<Subscription> = []
-  state: string = 'paused'
+  state: string = 'paused';
+  trackInfo: TrackModel | undefined;
 
   constructor(public multimediaService: MultimediaService) {  }
 
@@ -25,6 +26,10 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     //   console.log('I must reproduce this track 🔊🎶', res);
     // })
 
+  const trackInfoObserver$ = this.multimediaService.trackInfo$.subscribe(
+      (trackInfo) => (this.trackInfo = trackInfo)
+    );
+    this.listObservers$.push(trackInfoObserver$);
   }
 
   ngOnDestroy(): void{

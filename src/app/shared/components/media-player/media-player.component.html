@@ -18,12 +18,12 @@
 <!-- TEMPLATES ZONE -->
 
 <ng-template #artistZone>
-    <div class="artist-inside" *ngIf="multimediaService.trackInfo$ | async as mockCover">
+    <div class="artist-inside" *ngIf="multimediaService.trackInfo$ | async as trackInfo">
 
-        <img [src]="mockCover.cover" alt="" class="cover">
+        <img [src]="trackInfo.cover" alt="" class="cover">
         <div class="track-info">
-            <h3 class="track-title">{{mockCover.name}}</h3>
-            <h5 class="track-title sub-title">{{mockCover?.album}}</h5>
+            <h3 class="track-title">{{trackInfo.name}}</h3>
+            <h5 class="track-title sub-title">{{trackInfo?.album}}</h5>
         </div>
         <div class="track-like">
             <button class="btn-like">
@@ -36,7 +36,7 @@
 <ng-template #playerZone>
     <div class="player-controls-inside">
         <div class="buttons-media">
-            <button class="arrow btn">
+            <button class="arrow btn" (click)="multimediaService.playPreviousTrack()">
                 <i class="uil uil-previous"></i>
             </button>
             <button (click)="multimediaService.togglePlayer()" class="play btn">
@@ -46,7 +46,7 @@
                 }" class="uil "></i>
 
             </button>
-            <button class="arrow btn">
+            <button class="arrow btn" (click)="multimediaService.playNextTrack()">
                 <i class="uil uil-step-forward"></i>
             </button>
         </div>
