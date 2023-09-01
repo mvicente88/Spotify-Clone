@@ -1,11 +1,14 @@
 <div class="media-player">
-    <div class="media-player--wrapper">
+    <div class="media-player--wrapper ">
+        <!--Artist zone-->
         <div class="artist player-center">
             <ng-container *ngTemplateOutlet="artistZone"></ng-container>
         </div>
+        <!--Player zone-->
         <div class="player-controls player-center">
             <ng-container *ngTemplateOutlet="playerZone"></ng-container>
         </div>
+        <!--Additional controls-->
         <div class="player-audio player-center">
             <ng-container *ngTemplateOutlet="playerAudio"></ng-container>
         </div>
@@ -39,8 +42,9 @@
             <button (click)="multimediaService.togglePlayer()" class="play btn">
                 <i [ngClass]="{
                     'uil-play-circle':state === 'paused',
-                    'uil-pause-circle':state !== 'paused'                
-                }"class="uil"></i>
+                    'uil-pause-circle':state !== 'paused'
+                }" class="uil "></i>
+
             </button>
             <button class="arrow btn">
                 <i class="uil uil-step-forward"></i>
@@ -48,7 +52,7 @@
         </div>
         <div class="media-linetime">
 
-            <div class="time">{{multimediaService.timeLapsed$ | async}}</div>
+            <div class="time">{{multimediaService.timeElapsed$ | async}}</div>
             <span #progressBar (click)="handlePosition($event)" class="time-progress">
                 <span class="time-progress-live" [style.width]="(multimediaService.playerPercentage$ | async)+'%'">
                 </span>
