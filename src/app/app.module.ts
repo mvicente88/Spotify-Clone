@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CookieService } from 'ngx-cookie-service';
 import { InjectSessionInterceptor } from '@core/interceptors/inject-session.interceptor';
+import { TracksModule } from '@modules/tracks/tracks.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,14 +14,16 @@ import { InjectSessionInterceptor } from '@core/interceptors/inject-session.inte
     AppComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    TracksModule,
+    FormsModule
   ],
   providers: [
     CookieService,
     {
-      provide: HTTP_INTERCEPTORS,
+      provide: [HTTP_INTERCEPTORS],
       useClass:InjectSessionInterceptor,
       multi: true
     }

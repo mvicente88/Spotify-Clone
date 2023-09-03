@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayListHeaderComponent } from './play-list-header.component';
+import { PlayListHeaderComponent } from '../shared/components/play-list-header/play-list-header.component';
 
 describe('PlayListHeaderComponent', () => {
   let component: PlayListHeaderComponent;

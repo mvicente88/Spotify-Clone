@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { InjectSessionInterceptor } from './inject-session.interceptor';
+import { InjectSessionInterceptor } from '../core/interceptors/inject-session.interceptor';
 
 describe('InjectSessionInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({

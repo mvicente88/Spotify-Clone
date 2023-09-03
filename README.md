@@ -14,6 +14,14 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Access to the tracks page
+
+If you go to the login page `http://localhost:4200/auth/login` these are the login credentials:
+    email: test@test.com
+    password: 123456789
+
+You will then be redirected to `http://localhost:4200/tracks`.
+
 ## Features
 
 Song search and playback.
@@ -24,7 +32,7 @@ User account integration.
 
 ## Acknowledgments
 
-Special thanks to Leifer Mendez for the guidance and resources provided in the Udemy course on Angular development, which served as a foundation for this project.
+Special thanks to Leifer Mendez `https://gitlab.com/leifermendez` for the guidance and resources provided in the Udemy course on Angular development, which served as a foundation for this project.
 
 ## Future Plans
 

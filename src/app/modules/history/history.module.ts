@@ -5,6 +5,7 @@ import { HistoryPageComponent } from './pages/history-page/history-page.componen
 import { SearchComponent } from './components/search/search.component';
 import { SharedModule } from '@shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     SharedModule,
     HistoryRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ]
 })
 export class HistoryModule { }

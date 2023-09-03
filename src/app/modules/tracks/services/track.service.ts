@@ -13,12 +13,12 @@ export class TrackService {
   constructor(private httpClient: HttpClient) { 
   }
   
-  private skipById(listTracks: TrackModel[], id:number): Promise<TrackModel[]> {
-    return new Promise((resolve, reject) =>{
-      const listTmp = listTracks.filter(hiddenTrack => hiddenTrack._id !== id)
-      resolve(listTmp)
-    })
-  }
+  // private skipById(listTracks: TrackModel[], id:number): Promise<TrackModel[]> {
+  //   return new Promise((resolve, reject) =>{
+  //     const listTmp = listTracks.filter(hiddenTrack => hiddenTrack._id !== id)
+  //     resolve(listTmp)
+  //   })
+  // }
 
   getAllTracks$():Observable<any> {
     return this.httpClient.get(`${this.URL}/tracks`)

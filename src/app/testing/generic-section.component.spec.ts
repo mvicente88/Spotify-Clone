@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GenericSectionComponent } from './generic-section.component';
+import { GenericSectionComponent } from '../shared/components/generic-section/generic-section.component';
 
 describe('GenericSectionComponent', () => {
   let component: GenericSectionComponent;
