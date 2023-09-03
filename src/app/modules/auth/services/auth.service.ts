@@ -19,7 +19,7 @@ export class AuthService {
     return this.http.post(`${this.URL}/auth/login`, body)
   }
 
-  suma(a: number, b: number): number {
+  sum(a: number, b: number): number {
     return a + b
   }
 }

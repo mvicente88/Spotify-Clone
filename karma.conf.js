@@ -32,9 +32,7 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ]
     },
-    // list of files to exclude
-    	exclude: [
-    ],
+
       
       
     reporters: ['progress', 'kjhtml'],

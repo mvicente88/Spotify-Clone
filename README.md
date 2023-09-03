@@ -39,6 +39,8 @@ Special thanks to Leifer Mendez `https://gitlab.com/leifermendez` for the guidan
 ### Unit Testing with Karma
 We're actively working on incorporating unit testing using Karma. Unit tests help ensure that individual components and functions of the application behave as expected. We'll be writing test cases to validate the behavior of various Angular components, services, directives, and pipes.
 
+Run `ng test` to check the unit testing
+
 ### End-to-End Testing
 In addition to unit testing, we plan to implement end-to-end (E2E) testing. E2E tests simulate real user scenarios and interactions within the application. We'll be using tools like Protractor to automate the testing process and ensure the smooth functioning of the entire application flow.
 
