@@ -13,7 +13,7 @@
     </div>
 </div>
 <div *ngIf="mode==='big'" class="card-player player-big">
-    <img appImgBroken [src]="track.cover" [alt]="track.name" class="cover">
+    <img appImgBroken [customImg] = "'../../../assets/broken-image.jpg'" [src]="track.cover" [alt]="track.name" class="cover">
     <div class="content-player">
         {{track.name}}
     </div>
