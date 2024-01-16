@@ -1,8 +1,8 @@
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '@modules/auth/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -10,24 +10,25 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-  errorSession:boolean = false
-  formLogin: FormGroup = new FormGroup({});
+  errorSession: boolean = false
+  formLogin: UntypedFormGroup = new UntypedFormGroup({});
 
-  constructor(private authService: AuthService, private cookie: CookieService, private router: Router) {}
+  constructor(private authService: AuthService, private cookie: CookieService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.formLogin = new FormGroup(
+    this.formLogin = new UntypedFormGroup(
       {
-        email: new FormControl('',
-        [
+        email: new UntypedFormControl('', [
           Validators.required,
-          Validators.email,
+          Validators.email
         ]),
-        password: new FormControl('',
-        [
-          Validators.required,
-          Validators.minLength(8),
-        ])
+        password: new UntypedFormControl('',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(12)
+          ])
       }
     )
   }

@@ -22,9 +22,9 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
       .subscribe(status => this.state = status)    
     this.listObservers$ = [observer1$]
 
-    // this.multimediaService.trackInfo$.subscribe(res => {
-    //   console.log('I must reproduce this track 🔊🎶', res);
-    // })
+     this.multimediaService.trackInfo$.subscribe(res => {
+       console.log('I must reproduce this track 🔊🎶', res);
+     })
 
   const trackInfoObserver$ = this.multimediaService.trackInfo$.subscribe(
       (trackInfo) => (this.trackInfo = trackInfo)
